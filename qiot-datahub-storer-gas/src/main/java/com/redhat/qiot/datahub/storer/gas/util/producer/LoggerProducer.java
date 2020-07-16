@@ -1,4 +1,4 @@
-package com.redhat.qiot.datahub.streamer.pollution.util;
+package com.redhat.qiot.datahub.storer.gas.util.producer;
 
 import javax.enterprise.inject.Produces;
 import javax.enterprise.inject.spi.InjectionPoint;

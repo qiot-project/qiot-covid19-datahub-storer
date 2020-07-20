@@ -1,4 +1,4 @@
-package com.redhat.qiot.datahub.storer.pollution.persistence;
+package com.redhat.qiot.datahub.storer.gas.persistence;
 
 import java.util.concurrent.TimeUnit;
 
@@ -20,12 +20,12 @@ import com.mongodb.client.MongoCollection;
 import com.mongodb.client.MongoDatabase;
 import com.mongodb.client.model.IndexOptions;
 import com.mongodb.client.model.Indexes;
-import com.redhat.qiot.datahub.storer.pollution.domain.PollutionMeasurement;
+import com.redhat.qiot.datahub.storer.gas.domain.GasMeasurement;
 
 import io.quarkus.runtime.StartupEvent;
 
 @ApplicationScoped
-public class PollutionMeasurementRepository {
+public class GasMeasurementRepository {
 
     private final String DATABASE_NAME = "qiot";
 
@@ -39,7 +39,7 @@ public class PollutionMeasurementRepository {
     MongoClient mongoClient;
 
     MongoDatabase qiotDatabase;
-    MongoCollection<PollutionMeasurement> pmCollection = null;
+    MongoCollection<GasMeasurement> gmCollection = null;
     CodecProvider pojoCodecProvider;
     CodecRegistry pojoCodecRegistry;
 
@@ -54,8 +54,8 @@ public class PollutionMeasurementRepository {
         } catch (Exception e) {
             LOGGER.info("Collection {} already exists", COLLECTION_NAME);
         }
-        pmCollection = qiotDatabase.getCollection(COLLECTION_NAME,
-                PollutionMeasurement.class);
+        gmCollection = qiotDatabase.getCollection(COLLECTION_NAME,
+                GasMeasurement.class);
         /*
          * ensure indexes exist
          */
@@ -63,33 +63,32 @@ public class PollutionMeasurementRepository {
 
         // Create a CodecRegistry containing the PojoCodecProvider instance.
         pojoCodecProvider = PojoCodecProvider.builder()
-                .register("com.redhat.qiot.datahub.storer.pollution.domain")
+                .register("com.redhat.qiot.datahub.streamer.gas.domain")
                 .automatic(true).build();
         pojoCodecRegistry = CodecRegistries.fromRegistries(
                 MongoClientSettings.getDefaultCodecRegistry(),
                 CodecRegistries.fromProviders(pojoCodecProvider));
-        pmCollection = pmCollection.withCodecRegistry(pojoCodecRegistry);
+        gmCollection = gmCollection.withCodecRegistry(pojoCodecRegistry);
     }
 
     private void ensureIndexes() {
         IndexOptions expirationOptionIndex = new IndexOptions().expireAfter(2L,
                 TimeUnit.DAYS);
-        pmCollection.createIndex(Indexes.ascending("time"),
+        gmCollection.createIndex(Indexes.ascending("time"),
                 expirationOptionIndex);
         IndexOptions uniqueIndexOptions = new IndexOptions().unique(true);
-        pmCollection.createIndex(Indexes.ascending("stationId", "time"),
+        gmCollection.createIndex(Indexes.ascending("stationId", "time"),
                 uniqueIndexOptions);
     }
 
-    public void save(PollutionMeasurement pm) {
-        LOGGER.info(
-                "Persisting the measurement \n{}\nin the coarse collection",
-                pm);
+    public void save(GasMeasurement gm) {
+        LOGGER.info("Persisting the measurement \n{}\nin the coarse collection",
+                gm);
         try {
-            pmCollection.insertOne(pm);
+            gmCollection.insertOne(gm);
         } catch (Exception e) {
             LOGGER.error("An error occurred while persisting the measurement \n"
-                    + pm.toString(), e);
+                    + gm.toString(), e);
         }
     }
 }

@@ -15,6 +15,7 @@ import com.redhat.qiot.datahub.storer.gas.domain.GasMeasurement;
 import com.redhat.qiot.datahub.storer.gas.persistence.GasMeasurementRepository;
 import com.redhat.qiot.datahub.storer.gas.util.event.MeasurementReceived;
 
+
 /**
  * @author abattagl
  *

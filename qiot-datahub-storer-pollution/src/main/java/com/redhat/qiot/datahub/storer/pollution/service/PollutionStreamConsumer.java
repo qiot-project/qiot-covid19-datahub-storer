@@ -1,6 +1,9 @@
 package com.redhat.qiot.datahub.storer.pollution.service;
 
 import java.io.StringReader;
+import java.time.Instant;
+import java.time.OffsetDateTime;
+import java.time.ZoneOffset;
 import java.util.Date;
 
 import javax.enterprise.context.ApplicationScoped;
@@ -41,7 +44,12 @@ public class PollutionStreamConsumer {
             pm = new PollutionMeasurement();
             jsonObject = reader.readObject();
             pm.stationId = jsonObject.getJsonNumber("stationId").intValue();
-            pm.time = new Date(jsonObject.getJsonNumber("instant").longValue());
+
+            OffsetDateTime utc = OffsetDateTime.ofInstant(
+                    Instant.ofEpochMilli(
+                            jsonObject.getJsonNumber("instant").longValue()),
+                    ZoneOffset.UTC);
+            pm.time = Date.from(utc.toInstant());
 
             pm.pm1_0 = jsonObject.getJsonNumber("pm1_0").intValue();
             pm.pm2_5 = jsonObject.getJsonNumber("pm2_5").intValue();

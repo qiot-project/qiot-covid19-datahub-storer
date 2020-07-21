@@ -1,6 +1,9 @@
 package com.redhat.qiot.datahub.storer.gas.service;
 
 import java.io.StringReader;
+import java.time.Instant;
+import java.time.OffsetDateTime;
+import java.time.ZoneOffset;
 import java.util.Date;
 
 import javax.enterprise.context.ApplicationScoped;
@@ -51,7 +54,13 @@ public class GasStreamConsumer {
             gm = new GasMeasurement();
             jsonObject = reader.readObject();
             gm.stationId = jsonObject.getJsonNumber("stationId").intValue();
-            gm.time = new Date(jsonObject.getJsonNumber("instant").longValue());
+
+            OffsetDateTime utc = OffsetDateTime.ofInstant(
+                    Instant.ofEpochMilli(
+                            jsonObject.getJsonNumber("instant").longValue()),
+                    ZoneOffset.UTC);
+            gm.time = Date.from(utc.toInstant());
+            
             if (!jsonObject.isNull("adc"))
                 gm.adc = jsonObject.getJsonNumber("adc").doubleValue();
             gm.nh3 = jsonObject.getJsonNumber("nh3").doubleValue();

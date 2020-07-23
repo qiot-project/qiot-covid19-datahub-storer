@@ -72,7 +72,7 @@ public class GasMeasurementRepository {
     }
 
     private void ensureIndexes() {
-        IndexOptions expirationOptionIndex = new IndexOptions().expireAfter(2L,
+        IndexOptions expirationOptionIndex = new IndexOptions().expireAfter(1L,
                 TimeUnit.DAYS);
         gmCollection.createIndex(Indexes.ascending("time"),
                 expirationOptionIndex);

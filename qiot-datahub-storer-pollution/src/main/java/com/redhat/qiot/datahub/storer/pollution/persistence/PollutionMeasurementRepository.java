@@ -72,7 +72,7 @@ public class PollutionMeasurementRepository {
     }
 
     private void ensureIndexes() {
-        IndexOptions expirationOptionIndex = new IndexOptions().expireAfter(2L,
+        IndexOptions expirationOptionIndex = new IndexOptions().expireAfter(1L,
                 TimeUnit.DAYS);
         pmCollection.createIndex(Indexes.ascending("time"),
                 expirationOptionIndex);

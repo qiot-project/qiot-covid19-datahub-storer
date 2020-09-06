@@ -55,11 +55,8 @@ public class GasStreamConsumer {
             jsonObject = reader.readObject();
             gm.stationId = jsonObject.getJsonNumber("stationId").intValue();
 
-            OffsetDateTime utc = OffsetDateTime.ofInstant(
-                    Instant.ofEpochMilli(
-                            jsonObject.getJsonNumber("instant").longValue()),
-                    ZoneOffset.UTC);
-            gm.time = Date.from(utc.toInstant());
+            gm.time =  Instant.parse(
+                    jsonObject.getString("instant"));
             
             if (!jsonObject.isNull("adc"))
                 gm.adc = jsonObject.getJsonNumber("adc").doubleValue();

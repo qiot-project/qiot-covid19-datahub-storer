@@ -45,11 +45,8 @@ public class PollutionStreamConsumer {
             jsonObject = reader.readObject();
             pm.stationId = jsonObject.getJsonNumber("stationId").intValue();
 
-            OffsetDateTime utc = OffsetDateTime.ofInstant(
-                    Instant.ofEpochMilli(
-                            jsonObject.getJsonNumber("instant").longValue()),
-                    ZoneOffset.UTC);
-            pm.time = Date.from(utc.toInstant());
+            pm.time =  Instant.parse(
+                    jsonObject.getString("instant"));
 
             pm.pm1_0 = jsonObject.getJsonNumber("pm1_0").intValue();
             pm.pm2_5 = jsonObject.getJsonNumber("pm2_5").intValue();

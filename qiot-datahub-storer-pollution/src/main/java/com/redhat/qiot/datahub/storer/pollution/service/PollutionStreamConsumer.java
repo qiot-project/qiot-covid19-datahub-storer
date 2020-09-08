@@ -48,12 +48,12 @@ public class PollutionStreamConsumer {
             pm.time =  Instant.parse(
                     jsonObject.getString("instant"));
 
-            pm.pm1_0 = jsonObject.getJsonNumber("pm1_0").intValue();
-            pm.pm2_5 = jsonObject.getJsonNumber("pm2_5").intValue();
-            pm.pm10 = jsonObject.getJsonNumber("pm10").intValue();
-            pm.pm1_0_atm = jsonObject.getJsonNumber("pm1_0_atm").intValue();
-            pm.pm2_5_atm = jsonObject.getJsonNumber("pm2_5_atm").intValue();
-            pm.pm10_atm = jsonObject.getJsonNumber("pm10_atm").intValue();
+            pm.pm1_0 = jsonObject.getJsonNumber("PM1_0").intValue();
+            pm.pm2_5 = jsonObject.getJsonNumber("PM2_5").intValue();
+            pm.pm10 = jsonObject.getJsonNumber("PM10").intValue();
+            pm.pm1_0_atm = jsonObject.getJsonNumber("PM1_0_atm").intValue();
+            pm.pm2_5_atm = jsonObject.getJsonNumber("PM2_5_atm").intValue();
+            pm.pm10_atm = jsonObject.getJsonNumber("PM10_atm").intValue();
             pm.gt0_3um = jsonObject.getJsonNumber("gt0_3um").intValue();
             pm.gt0_5um = jsonObject.getJsonNumber("gt0_5um").intValue();
             pm.gt1_0um = jsonObject.getJsonNumber("gt1_0um").intValue();

@@ -2,7 +2,7 @@
   <modelVersion>4.0.0</modelVersion>
   <groupId>com.redhat.qiot.datahub.routes</groupId>
   <artifactId>qiot-datahub-storer</artifactId>
-  <version>0.0.1-SNAPSHOT</version>
+  <version>1.0.0.GA</version>
   <packaging>pom</packaging>
   <modules>
       <module>qiot-datahub-storer-gas</module>

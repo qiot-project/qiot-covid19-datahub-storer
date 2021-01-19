@@ -1,8 +1,8 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
   <modelVersion>4.0.0</modelVersion>
-  <groupId>com.redhat.qiot.datahub.routes</groupId>
+  <groupId>org.qiot.covid19.datahub</groupId>
   <artifactId>qiot-datahub-storer</artifactId>
-  <version>1.0.0.GA</version>
+  <version>1.0.1</version>
   <packaging>pom</packaging>
   <modules>
       <module>qiot-datahub-storer-gas</module>

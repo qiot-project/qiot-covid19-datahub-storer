@@ -54,15 +54,19 @@ public class GasStreamConsumer {
             jsonObject = reader.readObject();
             gm.stationId = jsonObject.getJsonNumber("stationId").intValue();
 
-            gm.time =  Instant.parse(
-                    jsonObject.getString("instant"));
-            
-            if (!jsonObject.isNull("adc"))
+            gm.time = Instant.parse(jsonObject.getString("instant"));
+
+            if (jsonObject.containsKey("adc"))
                 gm.adc = jsonObject.getJsonNumber("adc").doubleValue();
             gm.nh3 = jsonObject.getJsonNumber("nh3").doubleValue();
             gm.oxidising = jsonObject.getJsonNumber("oxidising").doubleValue();
             gm.reducing = jsonObject.getJsonNumber("reducing").doubleValue();
+        } catch (Exception e) {
+            LOGGER.error(
+                    "An error occurred processing the message paylod " + data,
+                    e);
         }
+        
         return gm;
     }
 

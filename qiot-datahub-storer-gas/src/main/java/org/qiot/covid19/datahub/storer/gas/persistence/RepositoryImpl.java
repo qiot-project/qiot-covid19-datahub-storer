@@ -1,8 +1,7 @@
 package org.qiot.covid19.datahub.storer.gas.persistence;
 
-import javax.annotation.PostConstruct;
-import javax.annotation.PreDestroy;
 import javax.enterprise.context.ApplicationScoped;
+import javax.enterprise.event.Observes;
 import javax.inject.Inject;
 
 import org.eclipse.microprofile.config.inject.ConfigProperty;
@@ -15,6 +14,9 @@ import com.influxdb.client.InfluxDBClientFactory;
 import com.influxdb.client.WriteApi;
 import com.influxdb.client.domain.WritePrecision;
 import com.influxdb.exceptions.InfluxException;
+
+import io.quarkus.runtime.ShutdownEvent;
+import io.quarkus.runtime.StartupEvent;
 
 @ApplicationScoped
 public class RepositoryImpl {
@@ -35,16 +37,16 @@ public class RepositoryImpl {
     @ConfigProperty(name = "influxdb.data.bucketName")
     String bucketName;
 
-    @PostConstruct
-    private void initializeInfluxDBClient() {
+    void onStart(@Observes StartupEvent ev) {
         LOGGER.info("Connecting to: {}, token: {}, org: {}, bucketId: {}",
                 connectionUrl, token, orgId, bucketId);
         influxDBClient = InfluxDBClientFactory.create(connectionUrl,
                 token.toCharArray(), orgId, bucketId);
+        LOGGER.info("Connection successfull:\n{}",
+                influxDBClient.health().toString());
     }
 
-    @PreDestroy
-    public void close() throws Exception {
+    void onStop(@Observes ShutdownEvent ev) {
         influxDBClient.close();
     }
 

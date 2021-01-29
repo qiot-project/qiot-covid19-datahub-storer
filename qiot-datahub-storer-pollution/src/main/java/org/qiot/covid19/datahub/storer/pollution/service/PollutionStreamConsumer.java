@@ -2,9 +2,6 @@ package org.qiot.covid19.datahub.storer.pollution.service;
 
 import java.io.StringReader;
 import java.time.Instant;
-import java.time.OffsetDateTime;
-import java.time.ZoneOffset;
-import java.util.Date;
 
 import javax.enterprise.context.ApplicationScoped;
 import javax.enterprise.event.Event;

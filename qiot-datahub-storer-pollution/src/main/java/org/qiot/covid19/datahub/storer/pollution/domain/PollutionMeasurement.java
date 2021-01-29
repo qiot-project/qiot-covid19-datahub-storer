@@ -1,7 +1,9 @@
 package org.qiot.covid19.datahub.storer.pollution.domain;
 
 import java.time.Instant;
-import java.util.Date;
+
+import com.influxdb.annotations.Column;
+import com.influxdb.annotations.Measurement;
 
 import io.quarkus.runtime.annotations.RegisterForReflection;
 
@@ -24,21 +26,36 @@ import io.quarkus.runtime.annotations.RegisterForReflection;
 }
  */
 @RegisterForReflection
+@Measurement(name = "pollution")
 public class PollutionMeasurement {
+    @Column(tag = true)
     public int stationId;
-    public Instant time;
+    @Column(tag = true)
     public int pm1_0;
+    @Column(tag = true)
     public int pm2_5;
+    @Column(tag = true)
     public int pm10;
+    @Column(tag = true)
     public int pm1_0_atm;
+    @Column(tag = true)
     public int pm2_5_atm;
+    @Column(tag = true)
     public int pm10_atm;
+    @Column(tag = true)
     public int gt0_3um;
+    @Column(tag = true)
     public int gt0_5um;
+    @Column(tag = true)
     public int gt1_0um;
+    @Column(tag = true)
     public int gt2_5um;
+    @Column(tag = true)
     public int gt5_0um;
+    @Column(tag = true)
     public int gt10um;
+    @Column(timestamp = true)
+    public Instant time;
 
     @Override
     public String toString() {

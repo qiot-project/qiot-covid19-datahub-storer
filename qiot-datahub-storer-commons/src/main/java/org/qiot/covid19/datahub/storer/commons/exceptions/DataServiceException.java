@@ -1,4 +1,4 @@
-package org.qiot.covid19.datahub.storer.gas.util.exceptions;
+package org.qiot.covid19.datahub.storer.commons.exceptions;
 
 public class DataServiceException extends Exception {
     /**

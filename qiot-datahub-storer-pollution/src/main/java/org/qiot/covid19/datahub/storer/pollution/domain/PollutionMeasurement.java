@@ -2,6 +2,8 @@ package org.qiot.covid19.datahub.storer.pollution.domain;
 
 import java.time.Instant;
 
+import org.qiot.covid19.datahub.storer.commons.domain.AbstractMeasurement;
+
 import com.influxdb.annotations.Column;
 import com.influxdb.annotations.Measurement;
 
@@ -27,44 +29,74 @@ import io.quarkus.runtime.annotations.RegisterForReflection;
  */
 @RegisterForReflection
 @Measurement(name = "pollution")
-public class PollutionMeasurement {
-    @Column(tag = true)
-    public int stationId;
-    @Column(tag = true)
+public class PollutionMeasurement extends AbstractMeasurement {
+    @Column
     public int pm1_0;
-    @Column(tag = true)
+    @Column
     public int pm2_5;
-    @Column(tag = true)
+    @Column
     public int pm10;
-    @Column(tag = true)
+    @Column
     public int pm1_0_atm;
-    @Column(tag = true)
+    @Column
     public int pm2_5_atm;
-    @Column(tag = true)
+    @Column
     public int pm10_atm;
-    @Column(tag = true)
+    @Column
     public int gt0_3um;
-    @Column(tag = true)
+    @Column
     public int gt0_5um;
-    @Column(tag = true)
+    @Column
     public int gt1_0um;
-    @Column(tag = true)
+    @Column
     public int gt2_5um;
-    @Column(tag = true)
+    @Column
     public int gt5_0um;
-    @Column(tag = true)
+    @Column
     public int gt10um;
-    @Column(timestamp = true)
-    public Instant time;
 
     @Override
     public String toString() {
-        return "PollutionMeasurement [stationId=" + stationId + ", time=" + time
-                + ", pm1_0=" + pm1_0 + ", pm2_5=" + pm2_5 + ", pm10=" + pm10
-                + ", pm1_0_atm=" + pm1_0_atm + ", pm2_5_atm=" + pm2_5_atm
-                + ", pm10_atm=" + pm10_atm + ", gt0_3um=" + gt0_3um
-                + ", gt0_5um=" + gt0_5um + ", gt1_0um=" + gt1_0um + ", gt2_5um="
-                + gt2_5um + ", gt5_0um=" + gt5_0um + ", gt10um=" + gt10um + "]";
+        StringBuilder builder = new StringBuilder();
+        builder.append("PollutionMeasurement [stationId=");
+        builder.append(stationId);
+        builder.append(", serial=");
+        builder.append(serial);
+        builder.append(", name=");
+        builder.append(name);
+        builder.append(", city=");
+        builder.append(city);
+        builder.append(", country=");
+        builder.append(country);
+        builder.append(", time=");
+        builder.append(time);
+        builder.append(latitude);
+        builder.append(", pm1_0=");
+        builder.append(pm1_0);
+        builder.append(", pm2_5=");
+        builder.append(pm2_5);
+        builder.append(", pm10=");
+        builder.append(pm10);
+        builder.append(", pm1_0_atm=");
+        builder.append(pm1_0_atm);
+        builder.append(", pm2_5_atm=");
+        builder.append(pm2_5_atm);
+        builder.append(", pm10_atm=");
+        builder.append(pm10_atm);
+        builder.append(", gt0_3um=");
+        builder.append(gt0_3um);
+        builder.append(", gt0_5um=");
+        builder.append(gt0_5um);
+        builder.append(", gt1_0um=");
+        builder.append(gt1_0um);
+        builder.append(", gt2_5um=");
+        builder.append(gt2_5um);
+        builder.append(", gt5_0um=");
+        builder.append(gt5_0um);
+        builder.append(", gt10um=");
+        builder.append(gt10um);
+        builder.append("]");
+        return builder.toString();
     }
 
 }

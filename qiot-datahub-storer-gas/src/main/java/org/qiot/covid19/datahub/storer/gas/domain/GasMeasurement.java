@@ -1,6 +1,6 @@
 package org.qiot.covid19.datahub.storer.gas.domain;
 
-import java.time.Instant;
+import org.qiot.covid19.datahub.storer.commons.domain.AbstractMeasurement;
 
 import com.influxdb.annotations.Column;
 import com.influxdb.annotations.Measurement;
@@ -9,30 +9,45 @@ import io.quarkus.runtime.annotations.RegisterForReflection;
 
 @RegisterForReflection
 @Measurement(name = "gas")
-public class GasMeasurement {
-    @Column(tag = true)
-    public int stationId;
+public class GasMeasurement extends AbstractMeasurement {
 
-    @Column(tag = true)
+    @Column
     public Double adc;
 
-    @Column(tag = true)
+    @Column
     public double nh3;
 
-    @Column(tag = true)
+    @Column
     public double oxidising;
 
-    @Column(tag = true)
+    @Column
     public double reducing;
-
-    @Column(timestamp = true)
-    public Instant time;
 
     @Override
     public String toString() {
-        return "GasMeasurement [stationId=" + stationId + ", time=" + time
-                + ", adc=" + adc + ", nh3=" + nh3 + ", oxidising=" + oxidising
-                + ", reducing=" + reducing + "]";
+        StringBuilder builder = new StringBuilder();
+        builder.append("GasMeasurement [stationId=");
+        builder.append(stationId);
+        builder.append(", serial=");
+        builder.append(serial);
+        builder.append(", name=");
+        builder.append(name);
+        builder.append(", city=");
+        builder.append(city);
+        builder.append(", country=");
+        builder.append(country);
+        builder.append(", time=");
+        builder.append(time);
+        builder.append(", adc=");
+        builder.append(adc);
+        builder.append(", nh3=");
+        builder.append(nh3);
+        builder.append(", oxidising=");
+        builder.append(oxidising);
+        builder.append(", reducing=");
+        builder.append(reducing);
+        builder.append("]");
+        return builder.toString();
     }
 
 }

@@ -1,9 +1,8 @@
 package org.qiot.covid19.datahub.storer.pollution.domain;
 
-import java.time.Instant;
+import org.qiot.covid19.datahub.storer.commons.domain.AbstractTelemetry;
 
-import org.qiot.covid19.datahub.storer.commons.domain.AbstractMeasurement;
-
+import com.fasterxml.jackson.annotation.JsonProperty;
 import com.influxdb.annotations.Column;
 import com.influxdb.annotations.Measurement;
 
@@ -13,12 +12,12 @@ import io.quarkus.runtime.annotations.RegisterForReflection;
  {
 "stationId":int,
 "instant":long,
-"PM1_0":int,
-"PM2_5":int,
-"PM10":int,
-"PM1_0_atm":int,
-“PM2_5_atm":int,
-"PM10_atm":int,
+"pm1_0":int,
+"pm2_5":int,
+"pm10":int,
+"pm1_0_atm":int,
+“pm2_5_atm":int,
+"pm10_atm":int,
 "gt0_3um":int,
 "gt0_5um":int,
 "gt1_0um":int,
@@ -29,29 +28,42 @@ import io.quarkus.runtime.annotations.RegisterForReflection;
  */
 @RegisterForReflection
 @Measurement(name = "pollution")
-public class PollutionMeasurement extends AbstractMeasurement {
+public class PollutionTelemetry extends AbstractTelemetry {
+
+    @JsonProperty(value = "pm1_0")
     @Column
     public int pm1_0;
+    @JsonProperty(value = "pm2_5")
     @Column
     public int pm2_5;
+    @JsonProperty(value = "pm10")
     @Column
     public int pm10;
+    @JsonProperty(value = "pm1_0_atm")
     @Column
     public int pm1_0_atm;
+    @JsonProperty(value = "pm2_5_atm")
     @Column
     public int pm2_5_atm;
+    @JsonProperty(value = "pm10_atm")
     @Column
     public int pm10_atm;
+    @JsonProperty(value = "gt0_3um")
     @Column
     public int gt0_3um;
+    @JsonProperty(value = "gt0_5um")
     @Column
     public int gt0_5um;
+    @JsonProperty(value = "gt1_0um")
     @Column
     public int gt1_0um;
+    @JsonProperty(value = "gt2_5um")
     @Column
     public int gt2_5um;
+    @JsonProperty(value = "gt5_0um")
     @Column
     public int gt5_0um;
+    @JsonProperty(value = "gt10um")
     @Column
     public int gt10um;
 

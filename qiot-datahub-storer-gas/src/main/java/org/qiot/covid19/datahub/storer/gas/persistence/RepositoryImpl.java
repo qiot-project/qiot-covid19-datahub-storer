@@ -5,7 +5,7 @@ import javax.enterprise.event.Observes;
 import javax.inject.Inject;
 
 import org.qiot.covid19.datahub.storer.commons.persistence.AbstractRepository;
-import org.qiot.covid19.datahub.storer.gas.domain.GasMeasurement;
+import org.qiot.covid19.datahub.storer.gas.domain.GasTelemetry;
 import org.slf4j.Logger;
 
 import com.influxdb.client.InfluxDBClientFactory;
@@ -14,7 +14,7 @@ import io.quarkus.runtime.ShutdownEvent;
 import io.quarkus.runtime.StartupEvent;
 
 @ApplicationScoped
-public class RepositoryImpl extends AbstractRepository<GasMeasurement> {
+public class RepositoryImpl extends AbstractRepository<GasTelemetry> {
 
 
     @Inject

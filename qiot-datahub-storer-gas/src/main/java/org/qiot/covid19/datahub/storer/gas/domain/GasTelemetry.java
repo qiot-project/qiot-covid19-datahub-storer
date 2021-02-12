@@ -1,7 +1,8 @@
 package org.qiot.covid19.datahub.storer.gas.domain;
 
-import org.qiot.covid19.datahub.storer.commons.domain.AbstractMeasurement;
+import org.qiot.covid19.datahub.storer.commons.domain.AbstractTelemetry;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import com.influxdb.annotations.Column;
 import com.influxdb.annotations.Measurement;
 
@@ -9,19 +10,21 @@ import io.quarkus.runtime.annotations.RegisterForReflection;
 
 @RegisterForReflection
 @Measurement(name = "gas")
-public class GasMeasurement extends AbstractMeasurement {
+public class GasTelemetry extends AbstractTelemetry {
 
+    @JsonProperty(value = "adc")
     @Column
     public Double adc;
-
+    @JsonProperty(value = "nh3")
     @Column
     public double nh3;
-
+    @JsonProperty(value = "oxidising")
     @Column
     public double oxidising;
-
+    @JsonProperty(value = "reducing")
     @Column
     public double reducing;
+
 
     @Override
     public String toString() {

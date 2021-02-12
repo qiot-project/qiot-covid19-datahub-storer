@@ -5,10 +5,12 @@ import javax.enterprise.event.Event;
 import javax.inject.Inject;
 
 import org.eclipse.microprofile.reactive.messaging.Incoming;
-import org.qiot.covid19.datahub.storer.pollution.domain.PollutionMeasurement;
-import org.qiot.covid19.datahub.storer.pollution.util.converters.PollutionMeasurementConverter;
+import org.qiot.covid19.datahub.storer.commons.exceptions.TelemetryDataValidationException;
+import org.qiot.covid19.datahub.storer.pollution.domain.PollutionTelemetry;
 import org.qiot.covid19.datahub.storer.pollution.util.event.MeasurementReceived;
 import org.slf4j.Logger;
+
+import com.fasterxml.jackson.databind.ObjectMapper;
 
 @ApplicationScoped
 public class PollutionStreamConsumer {
@@ -17,16 +19,22 @@ public class PollutionStreamConsumer {
     Logger LOGGER;
 
     @Inject
-    PollutionMeasurementConverter converter;
+    ObjectMapper MAPPER;
 
     @Inject
     @MeasurementReceived
-    Event<PollutionMeasurement> measurementReceivedEvent;
+    Event<PollutionTelemetry> measurementReceivedEvent;
 
     @Incoming("pollution")
-    public void process(String data) {
+    public void process(String data) throws TelemetryDataValidationException {
         LOGGER.info("Consumed message {} from the POLLUTION Stream", data);
-        PollutionMeasurement gm = converter.jsonToMeasurement(data);
-        measurementReceivedEvent.fire(gm);
+        // PollutionTelemetry gm = converter.jsonToMeasurement(data);
+        PollutionTelemetry pm;
+        try {
+            pm = MAPPER.readValue(data, PollutionTelemetry.class);
+        } catch (Exception e) {
+            throw new TelemetryDataValidationException(e);
+        }
+        measurementReceivedEvent.fire(pm);
     }
 }

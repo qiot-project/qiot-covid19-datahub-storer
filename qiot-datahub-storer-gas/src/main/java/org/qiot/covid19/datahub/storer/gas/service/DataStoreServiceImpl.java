@@ -8,7 +8,7 @@ import javax.enterprise.event.Observes;
 import javax.inject.Inject;
 
 import org.qiot.covid19.datahub.storer.commons.exceptions.DataServiceException;
-import org.qiot.covid19.datahub.storer.gas.domain.GasMeasurement;
+import org.qiot.covid19.datahub.storer.gas.domain.GasTelemetry;
 import org.qiot.covid19.datahub.storer.gas.persistence.RepositoryImpl;
 import org.qiot.covid19.datahub.storer.gas.util.event.MeasurementReceived;
 import org.slf4j.Logger;
@@ -25,7 +25,7 @@ public class DataStoreServiceImpl {
     @Inject
     RepositoryImpl repository;
 
-    void HandleIncomingMessage(@Observes @MeasurementReceived GasMeasurement gm)
+    void HandleIncomingMessage(@Observes @MeasurementReceived GasTelemetry gm)
             throws DataServiceException {
         repository.save(gm);
     }

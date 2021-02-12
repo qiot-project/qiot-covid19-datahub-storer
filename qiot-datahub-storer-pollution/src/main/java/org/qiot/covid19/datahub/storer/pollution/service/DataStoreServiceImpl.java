@@ -10,7 +10,7 @@ import javax.enterprise.event.Observes;
 import javax.inject.Inject;
 
 import org.qiot.covid19.datahub.storer.commons.exceptions.DataServiceException;
-import org.qiot.covid19.datahub.storer.pollution.domain.PollutionMeasurement;
+import org.qiot.covid19.datahub.storer.pollution.domain.PollutionTelemetry;
 import org.qiot.covid19.datahub.storer.pollution.persistence.RepositoryImpl;
 import org.qiot.covid19.datahub.storer.pollution.util.event.MeasurementReceived;
 import org.slf4j.Logger;
@@ -28,7 +28,7 @@ public class DataStoreServiceImpl {
     RepositoryImpl repository;
 
     void HandleIncomingMessage(
-            @Observes @MeasurementReceived PollutionMeasurement pm)
+            @Observes @MeasurementReceived PollutionTelemetry pm)
             throws DataServiceException {
         LOGGER.info("Received internal event with content {}", pm);
         repository.save(pm);

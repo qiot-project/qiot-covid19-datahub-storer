@@ -4,7 +4,7 @@ import javax.enterprise.event.Observes;
 import javax.inject.Inject;
 
 import org.eclipse.microprofile.config.inject.ConfigProperty;
-import org.qiot.covid19.datahub.storer.commons.domain.AbstractMeasurement;
+import org.qiot.covid19.datahub.storer.commons.domain.AbstractTelemetry;
 import org.qiot.covid19.datahub.storer.commons.exceptions.DataServiceException;
 import org.slf4j.Logger;
 
@@ -17,7 +17,7 @@ import com.influxdb.exceptions.InfluxException;
 import io.quarkus.runtime.ShutdownEvent;
 import io.quarkus.runtime.StartupEvent;
 
-public abstract class AbstractRepository<M extends AbstractMeasurement> {
+public abstract class AbstractRepository<M extends AbstractTelemetry> {
 
     @Inject
     Logger LOGGER;

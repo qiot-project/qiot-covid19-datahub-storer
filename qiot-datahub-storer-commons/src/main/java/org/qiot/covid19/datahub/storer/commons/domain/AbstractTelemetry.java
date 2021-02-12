@@ -2,24 +2,42 @@ package org.qiot.covid19.datahub.storer.commons.domain;
 
 import java.time.Instant;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import com.influxdb.annotations.Column;
 
-public abstract class AbstractMeasurement {
+import io.quarkus.runtime.annotations.RegisterForReflection;
+
+@RegisterForReflection
+public abstract class AbstractTelemetry {
+    @JsonProperty(value = "stationId")
     @Column(name = "station_id", tag = true)
     public String stationId;
+    
+    @JsonProperty(value = "serial")
     @Column(tag = true)
     public String serial;
+    
+    @JsonProperty(value = "name")
     @Column(tag = true)
     public String name;
+    
+    @JsonProperty(value = "longitude")
     @Column
     public double longitude;
+    
+    @JsonProperty(value = "latitude")
     @Column
     public double latitude;
+    
+    @JsonProperty(value = "city")
     @Column(tag = true)
     public String city;
+    
+    @JsonProperty(value = "country")
     @Column(tag = true)
     public String country;
 
+    @JsonProperty(value = "instant")
     @Column(timestamp = true)
     public Instant time;
 
@@ -41,7 +59,7 @@ public abstract class AbstractMeasurement {
             return false;
         if (getClass() != obj.getClass())
             return false;
-        AbstractMeasurement other = (AbstractMeasurement) obj;
+        AbstractTelemetry other = (AbstractTelemetry) obj;
         if (stationId == null) {
             if (other.stationId != null)
                 return false;

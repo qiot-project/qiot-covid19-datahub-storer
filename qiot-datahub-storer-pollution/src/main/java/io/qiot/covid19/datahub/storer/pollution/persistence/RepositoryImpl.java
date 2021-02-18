@@ -25,7 +25,7 @@ public class RepositoryImpl extends AbstractRepository<PollutionTelemetry> {
                 connectionUrl, token, orgId, bucketId);
         influxDBClient = InfluxDBClientFactory.create(connectionUrl,
                 token.toCharArray(), orgId, bucketId);
-        LOGGER.info("Connection successfull:\n{}",
+        LOGGER.info("Connection health-check:\n{}",
                 influxDBClient.health().toString());
     }
 

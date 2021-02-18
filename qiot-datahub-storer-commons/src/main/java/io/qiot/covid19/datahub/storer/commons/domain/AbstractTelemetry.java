@@ -22,11 +22,11 @@ public abstract class AbstractTelemetry {
     public String name;
     
     @JsonProperty(value = "longitude")
-    @Column
+    @Column(tag = true)
     public double longitude;
     
     @JsonProperty(value = "latitude")
-    @Column
+    @Column(tag = true)
     public double latitude;
     
     @JsonProperty(value = "city")

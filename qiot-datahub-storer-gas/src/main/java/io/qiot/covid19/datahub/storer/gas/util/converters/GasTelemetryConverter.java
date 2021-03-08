@@ -12,7 +12,7 @@ package io.qiot.covid19.datahub.storer.gas.util.converters;
 //import org.qiot.covid19.datahub.storer.gas.domain.GasTelemetry;
 //
 ///**
-// * @author abattagl
+// * @author andreabattaglia
 // *
 // */
 //@ApplicationScoped

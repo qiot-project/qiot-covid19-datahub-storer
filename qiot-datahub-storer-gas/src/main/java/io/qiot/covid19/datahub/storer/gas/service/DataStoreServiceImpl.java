@@ -15,7 +15,7 @@ import io.qiot.covid19.datahub.storer.gas.persistence.RepositoryImpl;
 import io.qiot.covid19.datahub.storer.gas.util.event.MeasurementReceived;
 
 /**
- * @author abattagl
+ * @author andreabattaglia
  *
  */
 @ApplicationScoped

@@ -4,7 +4,7 @@
 package io.qiot.covid19.datahub.storer.commons.exceptions;
 
 /**
- * @author abattagl
+ * @author andreabattaglia
  *
  */
 public class TelemetryDataValidationException extends Exception {

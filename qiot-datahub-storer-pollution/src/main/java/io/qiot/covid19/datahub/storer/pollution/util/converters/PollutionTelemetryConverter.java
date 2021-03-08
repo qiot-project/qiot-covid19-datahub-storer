@@ -11,7 +11,7 @@ package io.qiot.covid19.datahub.storer.pollution.util.converters;
 //import org.qiot.covid19.datahub.storer.pollution.domain.PollutionTelemetry;
 //
 ///**
-// * @author abattagl
+// * @author andreabattaglia
 // *
 // */
 //@ApplicationScoped

@@ -17,7 +17,7 @@ import io.qiot.covid19.datahub.storer.pollution.persistence.RepositoryImpl;
 import io.qiot.covid19.datahub.storer.pollution.util.event.MeasurementReceived;
 
 /**
- * @author abattagl
+ * @author andreabattaglia
  *
  */
 @ApplicationScoped

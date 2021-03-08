@@ -14,7 +14,7 @@ package io.qiot.covid19.datahub.storer.commons.utils;
 //import org.qiot.covid19.datahub.storer.commons.domain.AbstractTelemetry;
 //
 ///**
-// * @author abattagl
+// * @author andreabattaglia
 // *
 // */
 //public abstract class AbstractTelemetryConverter<M extends AbstractTelemetry> {

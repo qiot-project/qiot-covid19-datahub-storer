@@ -21,12 +21,16 @@ public class RepositoryImpl extends AbstractRepository<GasTelemetry> {
     Logger LOGGER;
     
     void onStart(@Observes StartupEvent ev) {
-        LOGGER.info("Connecting to: {}, token: {}, org: {}, bucketId: {}",
-                connectionUrl, token, orgId, bucketId);
+        
+        LOGGER.info("Connecting to: {}, token: {}, org: {}, bucketName: {}",
+                connectionUrl, token, orgId, bucketName);
+        
         influxDBClient = InfluxDBClientFactory.create(connectionUrl,
-                token.toCharArray(), orgId, bucketId);
+                token.toCharArray(), orgId, bucketName);
+        
         LOGGER.info("Connection health-check:\n{}",
                 influxDBClient.health().toString());
+        
     }
 
     void onStop(@Observes ShutdownEvent ev) {

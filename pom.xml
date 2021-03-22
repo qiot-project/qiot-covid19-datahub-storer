@@ -1,16 +1,20 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0"
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+    
     <modelVersion>4.0.0</modelVersion>
+
     <groupId>io.qiot.covid19.datahub</groupId>
-    <artifactId>qiot-datahub-storer</artifactId>
+    <artifactId>qiot-datahub-storer-parent</artifactId>
     <version>2.0.0-SNAPSHOT</version>
     <packaging>pom</packaging>
+
     <modules>
         <module>qiot-datahub-storer-commons</module>
         <module>qiot-datahub-storer-gas</module>
         <module>qiot-datahub-storer-pollution</module>
     </modules>
+    
     <properties>
         <compiler-plugin.version>3.8.1</compiler-plugin.version>
         <maven.compiler.parameters>true</maven.compiler.parameters>
@@ -25,6 +29,7 @@
         <surefire-plugin.version>2.22.1</surefire-plugin.version>
     </properties>
 
+    <dependencyManagement>
     <dependencies>
         <dependency>
             <groupId>${quarkus.platform.group-id}</groupId>
@@ -34,6 +39,55 @@
             <scope>import</scope>
         </dependency>
     </dependencies>
+    </dependencyManagement>
+
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.jboss.jandex</groupId>
+                <artifactId>jandex-maven-plugin</artifactId>
+                <version>1.0.7</version>
+                <executions>
+                    <execution>
+                        <id>make-index</id>
+                        <goals>
+                            <goal>jandex</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+            <plugin>
+                <groupId>io.quarkus</groupId>
+                <artifactId>quarkus-maven-plugin</artifactId>
+                <version>${quarkus-plugin.version}</version>
+                <extensions>true</extensions>
+                <executions>
+                    <execution>
+                        <goals>
+                            <goal>build</goal>
+                            <goal>generate-code</goal>
+                            <goal>generate-code-tests</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+            <plugin>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <version>${compiler-plugin.version}</version>
+            </plugin>
+            <plugin>
+                <artifactId>maven-surefire-plugin</artifactId>
+                <version>${surefire-plugin.version}</version>
+                <configuration>
+                    <systemPropertyVariables>
+                        <java.util.logging.manager>org.jboss.logmanager.LogManager</java.util.logging.manager>
+                        <maven.home>${maven.home}</maven.home>
+                    </systemPropertyVariables>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
+
     <profiles>
         <profile>
             <id>native</id>
